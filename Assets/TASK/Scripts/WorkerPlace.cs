@@ -6,7 +6,8 @@ namespace TaskWorker
 {
     public class WorkerPlace : MonoBehaviourExtBind
     {
-        public string placeKey;
+        [SerializeField] private string placeKey;
+
         [OnAwake]
         private void AddPositionsToModel()
         {

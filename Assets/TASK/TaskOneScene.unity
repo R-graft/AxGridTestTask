@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   globalModel: 0
   _worker: {fileID: 1162112468}
+  WorkerPathDuration: 0.5
 --- !u!4 &106733993
 Transform:
   m_ObjectHideFlags: 0
@@ -191,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: enableField
-      value: 
+      value: buttonEnable
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetPlace
@@ -199,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetState
-      value: OnWork
+      value: workState
       objectReference: {fileID: 0}
     - target: {fileID: 6066009556482518809, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: m_Color.b
@@ -317,11 +318,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1428466621748408460, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_text
-      value: 0
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: format
-      value: '{Balance.Game}'
+      value: '{stateView}'
       objectReference: {fileID: 0}
     - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: globalModel
@@ -336,8 +337,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
+      propertyPath: applyModelForFromatField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: fieldNames.Array.data[0]
-      value: 
+      value: stateView
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
+      propertyPath: fieldNames.Array.data[1]
+      value: splash
       objectReference: {fileID: 0}
     - target: {fileID: 4776431756448605259, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_Pivot.x
@@ -429,7 +438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6156527447366306693, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7589545600917875486, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_text
@@ -557,6 +566,7 @@ GameObject:
   - component: {fileID: 416864819}
   - component: {fileID: 416864821}
   - component: {fileID: 416864820}
+  - component: {fileID: 416864822}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -597,15 +607,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7028302, b: 0.7028302, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -622,6 +632,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416864818}
   m_CullTransparentMesh: 1
+--- !u!114 &416864822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416864818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91aaa10d350d705429c9e9202c25f8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalModel: 0
+  _workColor: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 0.48235294}
+  _homeColor: {r: 0.99178314, g: 1, b: 0, a: 0.46666667}
+  _storeColor: {r: 0, g: 1, b: 0.06287718, a: 0.5176471}
+  Bg: {fileID: 416864820}
+  _colorChangeDuration: 1
 --- !u!1 &675308817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: enableField
-      value: 
+      value: buttonEnable
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetPlace
@@ -1096,7 +1124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetState
-      value: OnHome
+      value: homeState
       objectReference: {fileID: 0}
     - target: {fileID: 6066009556482518809, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: m_Color.b
@@ -1478,7 +1506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: enableField
-      value: 
+      value: buttonEnable
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetPlace
@@ -1486,7 +1514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103875482731377186, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: targetState
-      value: OnStore
+      value: storeState
       objectReference: {fileID: 0}
     - target: {fileID: 6066009556482518809, guid: 60dcc4b2ad703b64392c4a6ebef19074, type: 3}
       propertyPath: m_Color.b
@@ -1856,11 +1884,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1428466621748408460, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_text
-      value: 0
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
+      propertyPath: format
+      value: '{cash}'
       objectReference: {fileID: 0}
     - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: modelChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
+      propertyPath: fieldNames.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4414560308684917835, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
+      propertyPath: fieldNames.Array.data[0]
+      value: cash
       objectReference: {fileID: 0}
     - target: {fileID: 4776431756448605259, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_Pivot.x
@@ -1952,7 +1992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6156527447366306693, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09175b1e25690f044900ec6cc5d98fc2, type: 3}

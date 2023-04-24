@@ -22,7 +22,7 @@ namespace AxGrid.Tools.Binders{
 
 		public string targetPlace = "";
 
-		public string enableField = "";
+		public string enableField = ModelKeys.enabledButton;
 
 		/// <summary>
 		/// Включена по умолчанию
@@ -85,8 +85,8 @@ namespace AxGrid.Tools.Binders{
 				key = Model.GetString(keyField, key);
 				Model.EventManager.AddAction($"On{keyField}Changed", OnKeyChanged);
 			}
-			OnItemEnable();
 
+			OnItemEnable();
 		}
 
 		public void OnKeyChanged()
@@ -100,7 +100,7 @@ namespace AxGrid.Tools.Binders{
 		
 		public void OnItemEnable()
 		{
-			if (button.interactable != Model.GetBool(enableField, defaultEnable))
+			if (button.interactable != Model.GetBool(enableField, defaultEnable) && CheckTargetState())
 				button.interactable = Model.GetBool(enableField, defaultEnable);
 		}
 
@@ -134,7 +134,7 @@ namespace AxGrid.Tools.Binders{
 			{
 				Model?.EventManager.Invoke("SoundPlay", "Click");
 
-                Model?.EventManager.Invoke("sendWorker", targetPlace, targetState);
+                Model?.EventManager.Invoke(EventKeys.sendWorker, targetPlace, targetState);
 
                 button.interactable = false;
             }
@@ -180,11 +180,9 @@ namespace AxGrid.Tools.Binders{
 			}
 		}
 
-		[Bind("sendWorker")]
-		private void SetInteractable(string direction)
+		private bool CheckTargetState()
 		{
-			if (direction != targetPlace)
-				button.interactable = true;
+			return Model.GetString(ModelKeys.targetState) == targetState ? false : true;
 		}
 	}
 }

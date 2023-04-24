@@ -2,22 +2,23 @@ using AxGrid;
 using AxGrid.Base;
 using AxGrid.FSM;
 using AxGrid.Model;
+using UnityEngine;
 
 namespace TaskWorker
 {
-    [State("OnStore")]
+    [State(StateKeys.storeState)]
     public class StoreState : FSMState
     {
         [Enter]
         private void EnterThis()
         {
-            Settings.Invoke("ViewCurrentState", $"{Parent.CurrentStateName}");
+            Model.Set(ModelKeys.stateView, StateKeys.storeState);
         }
 
         [Loop(1f)]
         private void LoopThis()
         {
-            Model.Dec("cashCount", 1);
+            Model.Dec(ModelKeys.cash, 1);
         }
     }
 }

@@ -2,17 +2,18 @@ using AxGrid;
 using AxGrid.Base;
 using AxGrid.FSM;
 using AxGrid.Model;
+using AxGrid.Text;
 using UnityEngine;
 
 namespace TaskWorker
 {
-    [State("OnHome")]
+    [State(StateKeys.homeState)]
     public class HomeState : FSMState
     {
         [Enter]
         private void EnterThis()
         {
-            Settings.Invoke("ViewCurrentState", $"{Parent.CurrentStateName}");
+            Model.Set(ModelKeys.stateView, StateKeys.homeState);
         }
     }
 }

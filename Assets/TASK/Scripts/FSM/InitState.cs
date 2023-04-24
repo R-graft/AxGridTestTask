@@ -6,15 +6,17 @@ using UnityEngine;
 
 namespace TaskWorker
 {
-    [State("InitState")]
+    [State(StateKeys.initState)]
     public class InitState : FSMState
     {
+        private const int defaultCahsCount = 100;
+
         [Enter]
         private void EnterThis()
         {
-            Settings.Model.EventManager.Invoke("OnSetStartPos");
+            Settings.Model.EventManager.Invoke(EventKeys.workerToStartPos);
 
-            Parent.Change("OnHome");
+            Model.Set(ModelKeys.cash, defaultCahsCount);
         }
     }
 }

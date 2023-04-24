@@ -10,19 +10,18 @@ namespace TaskWorker
     {
         [SerializeField] private Transform _worker;
 
-        [Bind("OnSetStartPos")]
+        public float WorkerPathDuration = 1;
+
+        [Bind(EventKeys.workerToStartPos)]
         private void SetWorkerOnStartPosition()
         {
-            var defaultPos = (Vector3)Model.Get("ToHome");
-
-            Path
-            .EasingLinear(2f, 0, 1, (f) => _worker.position = Vector3.Lerp(_worker.position, defaultPos, f));
+            _worker.position = Vector3.zero;
         }
 
-        [Bind("workerNextPlace")]
+        [Bind(EventKeys.workerNextPlace)]
         private void GetNewDirection()
         {
-            string direction = Settings.Model.GetString("workerDirection");
+            string direction = Settings.Model.GetString(ModelKeys.workerDirection);
 
             Vector3 targetPosition = (Vector3)Settings.Model.Get(direction);
 
@@ -32,8 +31,8 @@ namespace TaskWorker
         private void PathToNextPlace(Vector2 target)
         {
             Path
-            .EasingLinear(0.5f, 0, 1, (f) => _worker.position = Vector3.MoveTowards(_worker.position, target, 0.5f))
-            .Action(() => Settings.Fsm.Change(Model.GetString("targetState")));  
+            .EasingLinear(WorkerPathDuration, 0, 1, (f) => _worker.position = Vector3.MoveTowards(_worker.position, target, WorkerPathDuration / 2))
+            .Action(() => Settings.Fsm.Change(Model.GetString(ModelKeys.targetState))).Action(()=> print(1)); 
         }
     }
 }

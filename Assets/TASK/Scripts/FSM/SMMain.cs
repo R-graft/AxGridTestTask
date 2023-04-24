@@ -23,7 +23,7 @@ namespace TaskWorker
         [OnStart]
         private void StartThis()
         {
-            Settings.Fsm.Start("InitState");
+            Settings.Fsm.Start(StateKeys.initState);
         }
 
         [OnUpdate]
@@ -35,15 +35,15 @@ namespace TaskWorker
         [OnRefresh(0.1f)]
         private void RefreshThis()
         {
-            Debug.Log(1);
+         
         }
 
-        [Bind("sendWorker")]
-        private void SendWorkerToNextPlace(string direction, string state)
+        [Bind(EventKeys.sendWorker)]
+        private void SendWorkerToNextPlace(string targetPlace, string nextState)
         {
-            Model.Set("workerDirection", direction);
-            Model.Set("targetState", state);
-            Settings.Fsm.Change("OnWayState");
+            Model.Set(ModelKeys.workerDirection, targetPlace);
+            Model.Set(ModelKeys.targetState, nextState);
+            Settings.Fsm.Change(StateKeys.onWayState);
         }
     }
 }

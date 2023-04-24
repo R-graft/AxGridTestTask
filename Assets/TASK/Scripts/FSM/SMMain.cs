@@ -35,7 +35,7 @@ namespace TaskWorker
         [OnRefresh(0.1f)]
         private void RefreshThis()
         {
-            Log.Debug(Settings.Fsm.CurrentStateName);
+            Debug.Log(1);
         }
 
         [Bind("sendWorker")]

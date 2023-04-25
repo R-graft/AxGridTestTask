@@ -32,12 +32,6 @@ namespace TaskWorker
             Settings.Fsm.Update(Time.deltaTime);
         }
 
-        [OnRefresh(0.1f)]
-        private void RefreshThis()
-        {
-         
-        }
-
         [Bind(EventKeys.sendWorker)]
         private void SendWorkerToNextPlace(string targetPlace, string nextState)
         {

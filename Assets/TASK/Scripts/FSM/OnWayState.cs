@@ -1,17 +1,10 @@
-using AxGrid;
-using AxGrid.Base;
 using AxGrid.FSM;
-using AxGrid.Path;
-using AxGrid.Model;
-using UnityEngine;
 
 namespace TaskWorker
 {
     [State(StateKeys.onWayState)]
     public class OnWayState : FSMState
     {
-        private Transform _worker;
-
         [Enter]
         private void EnterThis()
         {
@@ -23,7 +16,7 @@ namespace TaskWorker
         [One(0)]
         private void SendWorkerToTarget()
         {
-            Model.EventManager.Invoke(EventKeys.workerNextPlace);
+            Model.EventManager.Invoke(EventKeys.workerNextPlace, Model.GetString(ModelKeys.targetState));
         }
 
         [Exit]

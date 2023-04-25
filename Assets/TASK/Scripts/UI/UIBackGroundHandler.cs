@@ -1,10 +1,8 @@
-using AxGrid;
 using AxGrid.Base;
 using AxGrid.Model;
 using AxGrid.Path;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class UIBackGroundHandler : MonoBehaviourExtBind
 {
@@ -24,11 +22,12 @@ public class UIBackGroundHandler : MonoBehaviourExtBind
         Model.Set(StateKeys.workState, _workColor);
     }
 
-    [Bind(ModelKeys.colorKey)]
-    private void OnChangeColor(string state)
+    [Bind(EventKeys.workerNextPlace)]
+    private void OnChangeColor(string targetState)
     {
-        Color targetColor = (Color)Model.Get(state);
+        //var targetState = Model.GetString(ModelKeys.targetState);
+        var targetColor = (Color)Model.Get(targetState);
 
-        Path.EasingLinear(_colorChangeDuration, 0, 1, (f) => Bg.color = Color.Lerp(Bg.color, Color.red, f));
+        Path.EasingLinear(_colorChangeDuration, 0, 1, (f) => Bg.color = Color.Lerp(Bg.color, targetColor, f / 2));
     }
 }

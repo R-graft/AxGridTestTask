@@ -1,8 +1,6 @@
 using AxGrid;
 using AxGrid.Base;
 using AxGrid.FSM;
-using AxGrid.Model;
-using UnityEngine;
 
 namespace TaskWorker
 {
@@ -13,6 +11,8 @@ namespace TaskWorker
         private void EnterThis()
         {
             Model.Set(ModelKeys.stateView, StateKeys.storeState);
+
+            Model.EventManager.Invoke(ModelKeys.colorKey, StateKeys.storeState);
         }
 
         [Loop(1f)]

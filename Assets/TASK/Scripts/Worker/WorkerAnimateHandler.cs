@@ -21,18 +21,18 @@ namespace TaskWorker
         [Bind(EventKeys.workerNextPlace)]
         private void GetNewDirection()
         {
-            string direction = Settings.Model.GetString(ModelKeys.workerDirection);
+            var direction = Settings.Model.GetString(ModelKeys.workerDirection);
 
-            Vector3 targetPosition = (Vector3)Settings.Model.Get(direction);
+            var targetPosition = (Vector3)Settings.Model.Get(direction);
 
             PathToNextPlace(targetPosition);
         }
 
         private void PathToNextPlace(Vector2 target)
         {
-            Path
-            .EasingLinear(WorkerPathDuration, 0, 1, (f) => _worker.position = Vector3.MoveTowards(_worker.position, target, WorkerPathDuration / 2))
-            .Action(() => Settings.Fsm.Change(Model.GetString(ModelKeys.targetState))).Action(()=> print(1)); 
+            Path.
+                EasingLinear(WorkerPathDuration, 0, 1, (f) => _worker.position = Vector3.MoveTowards(_worker.position, target, f*2))
+            .Action(() => Settings.Fsm.Change(Model.GetString(ModelKeys.targetState))); 
         }
     }
 }
